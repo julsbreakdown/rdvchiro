@@ -11,6 +11,7 @@ import sys
 import csv
 import pprint
 import logging
+import models
 
 from deform.renderer import configure_zpt_renderer
 
@@ -47,9 +48,12 @@ from pyramid.view import (
 from pygments import highlight
 from pygments.formatters import HtmlFormatter
 from pygments.lexers import PythonLexer
-
+import sqlahelper
 import deform
 import colander
+
+
+DBSession = sqlahelper.get_session()
 
 _ = TranslationStringFactory('deformdemo')
 
@@ -86,7 +90,6 @@ class DeformDemo(object):
                     success=None, readonly=False, is_i18n=False):
 
         captured = None
-
         if submitted in self.request.POST:
             # the request represents a form submission
             try:
@@ -244,7 +247,7 @@ class DeformDemo(object):
         form.formid = "my-pop-up"
 
     @view_config(renderer='templates/form.pt', name='edit')
-    @demonstrate('Edit Form')
+    @demonstrate('Patients')
     def edit(self):
         import datetime
 
