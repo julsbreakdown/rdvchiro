@@ -3,6 +3,7 @@ import sys
 import transaction
 
 from sqlalchemy import engine_from_config
+from models import Base
 
 from pyramid.paster import (
     get_appsettings,
@@ -33,7 +34,7 @@ def main(argv=sys.argv):
     DBSession.configure(bind=engine)
     Base.metadata.create_all(engine)
     with transaction.manager:
-        model = Page(title='Root', body='<p>Root</p>')
+        model =Users(first_name='Julien', last_name='waddle')
         DBSession.add(model)
 
 

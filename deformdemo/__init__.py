@@ -206,66 +206,24 @@ class DeformDemo(object):
         return L
 
     
-    @view_config(renderer='templates/form.pt', name='checkbox')
-    @demonstrate('Checkbox Widget')
-    def checkbox(self):
-
-        class Schema(colander.Schema):
-            want = colander.SchemaNode(
-                colander.Boolean(),
-                description='Check this box!',
-                widget=deform.widget.CheckboxWidget(),
-                title='I Want It!')
-
-        schema = Schema()
-        form = deform.Form(schema, buttons=('submit',))
-
-        return self.render_form(form)
-	"""
-        Source code:
-
-        https://github.com/Pylons/deformdemo/blob/master/deformdemo/templates/popup_example.pt
-
-        https://github.com/Pylons/deformdemo/blob/master/deformdemo/custom_widgets/modal.pt
-        """
-
-        class Schema(colander.Schema):
-
-            title = "Pop up example title"
-
-            # Override default form.pt for rendering <form>
-            widget = deform.widget.FormWidget(template="modal.pt")
-
-            name = colander.SchemaNode(
-                colander.String(),
-                description='Enter your name (required)')
-
-        schema = Schema()
-        form = deform.Form(schema, buttons=('submit',))
-
-        # CSS is used in <button> opener and JS code
-        form.formid = "my-pop-up"
-
     @view_config(renderer='templates/form.pt', name='edit')
     @demonstrate('Patients')
     def edit(self):
         import datetime
 
-        class Mapping(colander.Schema):
+        class Person(colander.MappingSchema):
+            id = colander.SchemaNode(colander.Int(),
+                                 missing=colander.drop)
             name = colander.SchemaNode(
-                colander.String(),
-                description='Content name')
-            date = colander.SchemaNode(
-                colander.Date(),
-                widget=deform.widget.DatePartsWidget(),
-                description='Content date')
+                   colander.String(),
+                   validator=colander.Length(0, 128)
+    )
+            username = colander.SchemaNode(
+       	               colander.String(),
+        	       validator=colander.Length(0, 128)
+	    )
 
-        class Schema(colander.Schema):
-            number = colander.SchemaNode(
-                colander.Integer())
-            mapping = Mapping()
-
-        schema = Schema()
+        schema = Person()
         form = deform.Form(schema, buttons=('submit',))
         # We don't need to suppy all the values required by the schema
         # for an initial rendering, only the ones the app actually has

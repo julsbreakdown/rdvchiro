@@ -10,15 +10,7 @@
     <div class="well">
 
       <p>
-        This demo is written using <a
-        href="http://pylonsproject.org/">Pyramid</a>. But please note
-        that Deform does not depend on any particular web framework,
-        we just had to write a demo application in
-        <i>something</i>. If, for some unfathomable reason, you'd like
-        to run this demo application locally, please read the <a
-        href="https://github.com/Pylons/deformdemo"
-        >README file for installation of this application</a>.
-      </p>
+	Application pour la prise de rdv, informations des patients      </p>
 
       <p>
         For further information, see
