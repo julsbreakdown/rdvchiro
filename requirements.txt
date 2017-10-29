@@ -1,0 +1,8 @@
+
+zope.schema==4.4.2mr.developer
+zope.schema==4.4.2mr.developer
+zope.schema==4.4.2mr.developer
+index==4.1.0
+zope.interface==4.0.5
+zope.schema==4.4.2
+psycopg2=2.7.3
